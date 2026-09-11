@@ -241,7 +241,7 @@
   });
 
   /* ==========================================================================
-     8. INTERACTIVE APPOINTMENT & ENQUIRY ENGINE (WhatsApp & Email)
+     8. INTERACTIVE APPOINTMENT & ENQUIRY ENGINE (Google Forms + WhatsApp)
      ========================================================================== */
   const fName = $("f-name");
   const fPhone = $("f-phone");
@@ -250,8 +250,55 @@
   const fTime = $("f-time");
   const fMessage = $("f-message");
   const btnSendWa = $("btn-send-wa");
-  const btnSendEmail = $("btn-send-email");
+  const consultationForm = $("consultation-form");
+  const gformIframe = $("hidden-gform-iframe");
 
+  // Show a toast notification after successful Google Form submission
+  function showSuccessToast() {
+    let toast = document.getElementById("gform-success-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "gform-success-toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      toast.style.cssText = [
+        "position:fixed", "bottom:2rem", "left:50%", "transform:translateX(-50%)",
+        "background:var(--gold-500,#c9a227)", "color:#1a1a1a", "font-weight:700",
+        "padding:1rem 2rem", "border-radius:0.75rem", "box-shadow:0 8px 32px rgba(0,0,0,.45)",
+        "z-index:9999", "font-size:1rem", "text-align:center", "max-width:90vw",
+        "opacity:0", "transition:opacity .4s ease"
+      ].join(";");
+      toast.textContent = "✅ Enquiry submitted! Dr. Salmani will contact you shortly.";
+      document.body.appendChild(toast);
+    }
+    // Fade in
+    requestAnimationFrame(() => { toast.style.opacity = "1"; });
+    // Fade out after 5 seconds
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      setTimeout(() => toast.remove(), 500);
+    }, 5000);
+  }
+
+  // Detect when the hidden iframe loads after form POST → show success + reset form
+  let gformSubmitted = false;
+  if (gformIframe) {
+    gformIframe.addEventListener("load", () => {
+      if (gformSubmitted) {
+        showSuccessToast();
+        if (consultationForm) consultationForm.reset();
+        gformSubmitted = false;
+      }
+    });
+  }
+
+  if (consultationForm) {
+    consultationForm.addEventListener("submit", () => {
+      gformSubmitted = true;
+    });
+  }
+
+  // WhatsApp secondary button — still composes and sends a formatted message
   function composeEnquiryText() {
     const name = fName ? fName.value.trim() || "Not specified" : "Not specified";
     const phone = fPhone ? fPhone.value.trim() || "Not specified" : "Not specified";
@@ -274,24 +321,11 @@
     );
   }
 
-  function launchWhatsApp(text) {
-    const url = `https://wa.me/${PROFILE.whatsapp}?text=${encodeURIComponent(text)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-  }
-
   if (btnSendWa) {
     btnSendWa.addEventListener("click", () => {
       const text = composeEnquiryText();
-      launchWhatsApp(text);
-    });
-  }
-
-  if (btnSendEmail) {
-    btnSendEmail.addEventListener("click", () => {
-      const subject = `Enquiry: ${fService ? fService.value : "Consultation"} — Dr. Salmani`;
-      const body = composeEnquiryText();
-      const mailtoUrl = `mailto:${PROFILE.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoUrl;
+      const url = `https://wa.me/${PROFILE.whatsapp}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
     });
   }
 
