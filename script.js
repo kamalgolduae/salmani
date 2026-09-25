@@ -402,7 +402,7 @@
       `• *Preferred Slot:* ${val(fTime, "Any suitable time")}\n` +
       (message ? `• *Details:* ${message}\n` : "") +
       `----------------------------------------\n` +
-      `_Sent via drsalmani.in_`
+      `_Sent via salmani.vercel.app_`
     );
   }
 

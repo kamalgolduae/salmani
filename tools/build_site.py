@@ -68,7 +68,7 @@ JSON_LD = """  <script type="application/ld+json">
     "jobTitle": "Consultant Psychologist, Educational Psychologist & International Trainer",
     "telephone": ["+91-9048505850", "+91-9074574246"],
     "email": "salmanijalal@gmail.com",
-    "url": "https://drsalmani.in/",
+    "url": "https://salmani.vercel.app/",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Tower 17, EC Mall, ICA Campus",
