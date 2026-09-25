@@ -1,0 +1,125 @@
+"""
+Assemble the static site from src/ into the project root.
+
+    python tools/build_site.py
+
+Each page in src/pages/ holds only its <main> content. This script wraps it
+with the shared head, icon sprite, header, footer and scripts, marks the
+current page in the navigation, and writes <slug>.html to the project root.
+Partials can be pulled into a page with  <!-- include:name -->.
+
+Edit the files in src/, never the generated HTML in the root.
+"""
+from pathlib import Path
+import re
+
+ROOT = Path(__file__).resolve().parent.parent
+SRC = ROOT / "src"
+PARTIALS = SRC / "partials"
+
+SITE = "Dr. Abdussalam Salmani"
+
+# slug: (output file, page title, meta description, extra scripts)
+PAGES = {
+    "home": ("index.html",
+             f"{SITE}, PhD — Consultant Psychologist, Family Counsellor & International Trainer | Kondotty, Kerala",
+             "Dr. Abdussalam Salmani, PhD — Consultant Psychologist, Educational Psychologist, Family Counsellor and International Trainer. 30+ years in education, 15+ years of consulting practice and 4000+ training programmes. Kondotty, Kerala.",
+             ["assets/gallery/gallery-data.js", "gallery.js"]),
+    "about": ("about.html",
+              f"About — {SITE}, PhD",
+              "Biography, journey, education and professional milestones of Dr. Abdussalam Salmani — educator, psychologist, family counsellor and trainer.",
+              []),
+    "expertise": ("expertise.html",
+                  f"Expertise — {SITE}, PhD",
+                  "Four pillars of expertise: educational psychology, consultant psychology, family and marital counselling, and training and keynote speaking.",
+                  []),
+    "counselling": ("counselling.html",
+                    f"Counselling — {SITE}, PhD",
+                    "Confidential personal, adolescent, family, couples and career counselling in Kondotty, Kerala and online. Process, consultation information and enquiry form.",
+                    []),
+    "achievements": ("achievements.html",
+                     f"Achievements — {SITE}, PhD",
+                     "Honours, qualifications and professional appointments of Dr. Abdussalam Salmani, including JCI Senator and 4000+ training programmes.",
+                     ["assets/gallery/gallery-data.js", "gallery.js"]),
+    "gallery": ("gallery.html",
+                f"Training & Work Gallery — {SITE}, PhD",
+                "Photographs from Dr. Abdussalam Salmani's training sessions, workshops and events, with programme banners and posters.",
+                ["assets/gallery/gallery-data.js", "gallery.js"]),
+    "resources": ("resources.html",
+                  f"Books & Resources — {SITE}, PhD",
+                  "Downloadable profile, contact card and publications from Dr. Abdussalam Salmani.",
+                  []),
+    "book": ("book.html",
+             f"Book a Consultation — {SITE}, PhD",
+             "Book a consultation with Dr. Abdussalam Salmani. Reserve your session with a ₹500 advance, adjusted against your final consultation fee.",
+             ["booking.js"]),
+    "contact": ("contact.html",
+                f"Contact — {SITE}, PhD",
+                "Contact Dr. Abdussalam Salmani: phone, WhatsApp, email and clinic address at EC Mall, ICA Campus, Kondotty, Kerala.",
+                []),
+}
+
+JSON_LD = """  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dr. Abdussalam Salmani",
+    "honorificPrefix": "Dr.",
+    "jobTitle": "Consultant Psychologist, Educational Psychologist & International Trainer",
+    "telephone": ["+91-9048505850", "+91-9074574246"],
+    "email": "salmanijalal@gmail.com",
+    "url": "https://drsalmani.in/",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Tower 17, EC Mall, ICA Campus",
+      "addressLocality": "Kondotty",
+      "addressRegion": "Kerala",
+      "postalCode": "673638",
+      "addressCountry": "IN"
+    }
+  }
+  </script>"""
+
+
+def partial(name):
+    return (PARTIALS / f"{name}.html").read_text(encoding="utf-8")
+
+
+def expand_includes(html):
+    return re.sub(r"<!-- include:([\w-]+) -->", lambda m: partial(m.group(1)), html)
+
+
+def mark_current(html, slug):
+    return html.replace(f'data-nav="{slug}"', f'data-nav="{slug}" aria-current="page"')
+
+
+def build():
+    for slug, (out, title, desc, scripts) in PAGES.items():
+        body = expand_includes((SRC / "pages" / out).read_text(encoding="utf-8"))
+        path = "" if out == "index.html" else out.removesuffix(".html")
+        head = (partial("head")
+                .replace("{{title}}", title.replace("&", "&amp;"))
+                .replace("{{description}}", desc)
+                .replace("{{path}}", path)
+                .replace("{{slug}}", slug)
+                .replace("{{extra_head}}", JSON_LD if slug == "home" else ""))
+        tags = "\n".join(f'  <script src="{s}" defer></script>' for s in scripts)
+        page = (
+            f"<!-- Generated by tools/build_site.py from src/pages/{out}. Edit the source, then rebuild. -->\n"
+            + head
+            + partial("sprite")
+            + mark_current(partial("header"), slug)
+            + '\n  <main id="main">\n'
+            + body.rstrip()
+            + "\n  </main>\n"
+            + partial("footer")
+            + '\n  <script src="script.js" defer></script>\n'
+            + (tags + "\n" if tags else "")
+            + "</body>\n</html>\n"
+        )
+        (ROOT / out).write_text(page, encoding="utf-8", newline="\n")
+        print(f"  built {out}")
+
+
+if __name__ == "__main__":
+    build()

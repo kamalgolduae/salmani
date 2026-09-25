@@ -1,0 +1,308 @@
+
+    <section class="page-hero" style="padding-bottom:2rem">
+      <div class="wrap">
+        <nav class="breadcrumb rv" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Book a Consultation</span></nav>
+        <div class="eyebrow rv">Book a Consultation</div>
+        <h1 class="rv" data-d="1">Secure your <em>session.</em></h1>
+        <p class="lede rv" data-d="2">Five short steps. Your booking is confirmed once the office has verified your advance payment.</p>
+<!-- include:illo-book -->
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="wrap booking-shell">
+
+        <aside class="booking-aside">
+          <div class="advance-card">
+            <div class="eyebrow">Secure Your Session</div>
+            <span class="amt">₹500</span>
+            <span class="amt-label">Advance</span>
+            <p class="adjust-note">This advance will be adjusted against your final consultation fee.</p>
+          </div>
+          <div class="info-card">
+            <h3>Consultation details</h3>
+            <ul>
+              <li><svg><use href="#i-clock"/></svg><span>Mon – Sat, 9:30 AM – 6:30 PM, by appointment</span></li>
+              <li><svg><use href="#i-pin"/></svg><span>In person at Kondotty, or online by video</span></li>
+              <li><svg><use href="#i-mic"/></svg><span>Malayalam, English, Arabic or Hindi</span></li>
+              <li><svg><use href="#i-shield"/></svg><span>Strictly confidential</span></li>
+            </ul>
+          </div>
+          <div class="security-note">
+            <svg><use href="#i-lock"/></svg>
+            <span><strong>We will never ask for your UPI PIN, OTP, card PIN or bank password.</strong> Only the transaction reference (UTR) is needed to verify your payment.</span>
+          </div>
+        </aside>
+
+        <div class="booking-card" id="booking-app">
+          <ol class="stepper" id="stepper" aria-label="Booking progress">
+            <li class="current" aria-current="step"><span>Consultation</span></li>
+            <li><span>Your details</span></li>
+            <li><span>Registration</span></li>
+            <li><span>Advance</span></li>
+            <li><span>Payment details</span></li>
+          </ol>
+
+          <form id="booking-form" novalidate>
+
+            <!-- STEP 1 · CONSULTATION -->
+            <div class="step-panel active" data-step="1">
+              <h2>Choose your consultation</h2>
+              <p class="step-lede">Select the kind of session you need. You can add details in the next steps.</p>
+
+              <div class="choice-grid" role="radiogroup" aria-label="Consultation type">
+                <label class="choice"><input type="radio" name="service" value="Personal Counselling (Stress, Anxiety, Confidence)" required>
+                  <span class="choice-body"><svg><use href="#i-mind"/></svg><span><strong>Personal Counselling</strong><span>Stress, anxiety, confidence</span></span></span></label>
+                <label class="choice"><input type="radio" name="service" value="Adolescent &amp; Family Counselling">
+                  <span class="choice-body"><svg><use href="#i-users"/></svg><span><strong>Adolescent &amp; Family</strong><span>Parents, teenagers, home conflict</span></span></span></label>
+                <label class="choice"><input type="radio" name="service" value="Couples &amp; Pre-marital Counselling">
+                  <span class="choice-body"><svg><use href="#i-heart"/></svg><span><strong>Couples &amp; Pre-marital</strong><span>Preparation and marital guidance</span></span></span></label>
+                <label class="choice"><input type="radio" name="service" value="Career Guidance for Student (Courses &amp; Aptitude)">
+                  <span class="choice-body"><svg><use href="#i-compass"/></svg><span><strong>Career Guidance</strong><span>Courses, streams, aptitude</span></span></span></label>
+                <label class="choice"><input type="radio" name="service" value="Learning Disability Assessment &amp; Study Help">
+                  <span class="choice-body"><svg><use href="#i-book"/></svg><span><strong>Learning Difficulty Support</strong><span>Assessment-led study help</span></span></span></label>
+                <label class="choice"><input type="radio" name="service" value="Meditation &amp; Relaxation Therapy">
+                  <span class="choice-body"><svg><use href="#i-spark"/></svg><span><strong>Relaxation Therapy</strong><span>Breathing, mindfulness, sleep</span></span></span></label>
+              </div>
+              <span class="field-error" data-error-for="service" hidden></span>
+
+              <span class="fieldset-label">Format</span>
+              <div class="seg" role="radiogroup" aria-label="Consultation format">
+                <label class="choice"><input type="radio" name="mode" value="In-Person at Kondotty Clinic" checked><span class="choice-body"><strong>In person · Kondotty</strong></span></label>
+                <label class="choice"><input type="radio" name="mode" value="Online Video Consultation (Zoom / Meet)"><span class="choice-body"><strong>Online video</strong></span></label>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="b-date">Preferred date *</label>
+                  <input type="date" id="b-date" name="date" class="form-input" required>
+                  <span class="field-error" data-error-for="date" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="b-slot">Preferred time</label>
+                  <select id="b-slot" name="slot" class="form-select">
+                    <option value="Weekday Morning (10:00 AM - 1:00 PM)">Morning (10:00 AM – 1:00 PM)</option>
+                    <option value="Weekday Afternoon (2:00 PM - 4:30 PM)">Afternoon (2:00 PM – 4:30 PM)</option>
+                    <option value="Weekday Evening (4:30 PM - 6:30 PM)">Evening (4:30 PM – 6:30 PM)</option>
+                    <option value="Earliest Available Slot">Earliest available</option>
+                  </select>
+                </div>
+              </div>
+              <p class="form-hint">The preferred date is a request. The office will confirm the exact time with you.</p>
+
+              <div class="step-actions">
+                <span></span>
+                <button type="button" class="btn btn-gold" data-next>Continue <svg><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+
+            <!-- STEP 2 · DETAILS -->
+            <div class="step-panel" data-step="2">
+              <h2>Your details</h2>
+              <p class="step-lede">So the office can reach you to confirm the appointment.</p>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="b-name">Full name *</label>
+                  <input type="text" id="b-name" name="name" class="form-input" autocomplete="name" required>
+                  <span class="field-error" data-error-for="name" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="b-phone">Mobile / WhatsApp number *</label>
+                  <input type="tel" id="b-phone" name="phone" class="form-input" autocomplete="tel" placeholder="+91 98470 12345" required>
+                  <span class="field-error" data-error-for="phone" hidden></span>
+                </div>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="b-email">Email (optional)</label>
+                  <input type="email" id="b-email" name="email" class="form-input" autocomplete="email">
+                  <span class="field-error" data-error-for="email" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="b-city">City / Country</label>
+                  <input type="text" id="b-city" name="city" class="form-input" autocomplete="address-level2" placeholder="e.g. Kondotty, or Dubai">
+                </div>
+              </div>
+              <div class="step-actions">
+                <button type="button" class="btn btn-ghost" data-back>Back</button>
+                <button type="button" class="btn btn-gold" data-next>Continue <svg><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+
+            <!-- STEP 3 · REGISTRATION -->
+            <div class="step-panel" data-step="3">
+              <h2>Consultation registration</h2>
+              <p class="step-lede">A few questions to help Dr. Salmani prepare. Everything you share is confidential.</p>
+
+              <span class="fieldset-label">Who is the session for?</span>
+              <div class="seg" role="radiogroup" aria-label="Who is the session for">
+                <label class="choice"><input type="radio" name="for" value="Myself" checked><span class="choice-body"><strong>Myself</strong></span></label>
+                <label class="choice"><input type="radio" name="for" value="My child"><span class="choice-body"><strong>My child</strong></span></label>
+                <label class="choice"><input type="radio" name="for" value="Couple"><span class="choice-body"><strong>Couple</strong></span></label>
+                <label class="choice"><input type="radio" name="for" value="Family"><span class="choice-body"><strong>Family</strong></span></label>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="b-age">Age of the person attending</label>
+                  <input type="number" id="b-age" name="age" class="form-input" min="3" max="100" inputmode="numeric">
+                </div>
+                <div class="form-group">
+                  <label for="b-lang">Preferred language</label>
+                  <select id="b-lang" name="language" class="form-select">
+                    <option>Malayalam</option>
+                    <option>English</option>
+                    <option>Arabic</option>
+                    <option>Hindi</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="b-concern">What would you like help with? *</label>
+                <textarea id="b-concern" name="concern" class="form-textarea" required placeholder="A few lines are enough. For example: my daughter in Plus Two has been anxious about exams and is not sleeping well."></textarea>
+                <span class="field-error" data-error-for="concern" hidden></span>
+              </div>
+
+              <div class="form-group">
+                <label for="b-prior">Any previous counselling?</label>
+                <select id="b-prior" name="prior" class="form-select">
+                  <option>No</option>
+                  <option>Yes</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </div>
+
+              <label class="consent">
+                <input type="checkbox" name="consent" id="b-consent" required>
+                <span>I understand that a <strong>₹500 advance</strong> is required to reserve the session, that it will be <strong>adjusted against the final consultation fee</strong>, and that the booking is confirmed only after the payment is verified.</span>
+              </label>
+              <span class="field-error" data-error-for="consent" hidden></span>
+
+              <div class="step-actions">
+                <button type="button" class="btn btn-ghost" data-back>Back</button>
+                <button type="button" class="btn btn-gold" data-next>Continue to advance <svg><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+
+            <!-- STEP 4 · ADVANCE PAYMENT -->
+            <div class="step-panel" data-step="4">
+              <h2>Pay the ₹500 advance</h2>
+              <p class="step-lede">Scan the QR code with any UPI app — Google Pay, PhonePe, Paytm or your bank's app.</p>
+
+              <div class="pay-grid">
+                <div class="qr-frame">
+                  <img id="upi-qr" alt="UPI QR code for the ₹500 consultation advance" width="206" height="206">
+                  <div class="qr-missing" id="upi-qr-missing" hidden>
+                    <svg width="34" height="34"><use href="#i-qr"/></svg>
+                    <span>The UPI QR code will appear here.</span>
+                  </div>
+                  <span class="qr-amt">₹500</span>
+                  <span class="qr-sub">Consultation advance</span>
+                </div>
+                <div>
+                  <ol class="pay-steps">
+                    <li>Open any UPI app and scan the QR code.</li>
+                    <li>Pay <strong>₹500</strong>. It is an advance, adjusted against your final consultation fee.</li>
+                    <li>After paying, note the <strong>UTR / UPI transaction reference</strong> shown in your app (usually 12 digits).</li>
+                  </ol>
+                  <div class="upi-id-row" id="upi-id-row" hidden>
+                    <span>UPI ID:</span> <code id="upi-id"></code>
+                    <button type="button" class="copy-btn" id="copy-upi">Copy</button>
+                    <span class="form-hint" style="flex-basis:100%;margin:0">Your app will show the payee name <strong id="upi-payee"></strong> — this is the correct account for the advance.</span>
+                  </div>
+                  <a class="btn btn-emerald" id="upi-deeplink" hidden><svg><use href="#i-phone"/></svg><span>Pay ₹500 in a UPI app</span></a>
+                  <div class="security-note" style="margin-top:1rem">
+                    <svg><use href="#i-alert"/></svg>
+                    <span>Never share your <strong>UPI PIN, OTP or bank password</strong> with anyone — including this website or the clinic.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn btn-ghost" data-back>Back</button>
+                <button type="button" class="btn btn-gold" data-next>I have paid — continue <svg><use href="#i-arrow"/></svg></button>
+              </div>
+            </div>
+
+            <!-- STEP 5 · PAYMENT DETAILS -->
+            <div class="step-panel" data-step="5">
+              <h2>Submit your payment details</h2>
+              <p class="step-lede">The office will match this reference with the payment received before confirming your booking.</p>
+
+              <dl class="booking-summary" id="booking-summary"></dl>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="b-pname">Name *</label>
+                  <input type="text" id="b-pname" name="payerName" class="form-input" autocomplete="name" required>
+                  <span class="field-error" data-error-for="payerName" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="b-pphone">Phone number *</label>
+                  <input type="tel" id="b-pphone" name="payerPhone" class="form-input" autocomplete="tel" required>
+                  <span class="field-error" data-error-for="payerPhone" hidden></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="b-pemail">Email (optional)</label>
+                <input type="email" id="b-pemail" name="payerEmail" class="form-input" autocomplete="email">
+                <span class="field-error" data-error-for="payerEmail" hidden></span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="b-utr">UTR / transaction reference *</label>
+                  <input type="text" id="b-utr" name="utr" class="form-input" inputmode="numeric" autocomplete="off" spellcheck="false" maxlength="22" required placeholder="e.g. 412345678901">
+                  <span class="form-hint">Found under "UPI transaction ID" or "UTR" in your payment app.</span>
+                  <span class="field-error" data-error-for="utr" hidden></span>
+                </div>
+                <div class="form-group">
+                  <label for="b-pdate">Payment date *</label>
+                  <input type="date" id="b-pdate" name="payDate" class="form-input" required>
+                  <span class="field-error" data-error-for="payDate" hidden></span>
+                </div>
+              </div>
+
+              <div class="step-actions">
+                <button type="button" class="btn btn-ghost" data-back>Back</button>
+                <button type="submit" class="btn btn-gold" id="booking-submit"><svg><use href="#i-check"/></svg><span>Submit booking</span></button>
+              </div>
+            </div>
+          </form>
+
+          <!-- RESULT -->
+          <div class="booking-result" id="booking-result" hidden tabindex="-1">
+            <div class="result-seal"><svg><use href="#i-check"/></svg></div>
+            <h2>Booking request received</h2>
+            <p>Your payment details have been submitted and are awaiting confirmation.</p>
+            <div class="ref-chip">Reference <code id="result-ref"></code></div>
+            <ol class="status-track" aria-label="Booking status">
+              <li class="done">Pending payment</li>
+              <li class="current" aria-current="step">Payment submitted</li>
+              <li>Payment verified</li>
+              <li>Booking confirmed</li>
+            </ol>
+            <p class="status-note">Dr. Salmani's office will verify the payment against your UTR and contact you by phone or WhatsApp to confirm the appointment time. Keep your reference number handy.</p>
+            <div class="section-foot center">
+              <a class="btn btn-emerald" id="result-wa" target="_blank" rel="noopener"><svg><use href="#i-wa"/></svg><span>Share reference on WhatsApp</span></a>
+              <a href="index.html" class="btn btn-ghost"><span>Back to home</span></a>
+            </div>
+          </div>
+
+          <!-- Requests made on this device -->
+          <div class="my-bookings" id="my-bookings" hidden>
+            <h3 style="font-size:1.1rem;margin-bottom:8px">Your booking requests on this device</h3>
+            <p class="form-hint" style="margin-bottom:10px">Statuses here show what you submitted. The office confirms verification and bookings directly by phone or WhatsApp.</p>
+            <div style="overflow-x:auto">
+              <table>
+                <thead><tr><th>Reference</th><th>Consultation</th><th>Submitted</th><th>Status</th></tr></thead>
+                <tbody id="my-bookings-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submissions go to the office's Google Form via this hidden frame -->
+    <iframe name="booking-gform-iframe" id="booking-gform-iframe" style="display:none" aria-hidden="true" title="Booking submission"></iframe>

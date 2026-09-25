@@ -1,0 +1,79 @@
+          <div class="booking-form-card rv" data-d="2">
+            <h3>Send an Instant Enquiry</h3>
+            <p class="form-desc">Fill in the quick details below. It instantly pre-formats a polite message and opens WhatsApp or email for immediate response.</p>
+
+            <form id="consultation-form"
+                  action="https://docs.google.com/forms/d/e/1FAIpQLScDzMoowkeIZjhj5vDCyOgXt8pgpFrKZDcyuA-ECUUcFj9QUw/formResponse"
+                  method="POST"
+                  target="hidden-gform-iframe">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="f-name">Your Full Name *</label>
+                  <input type="text" id="f-name" name="entry.1872235412" class="form-input" placeholder="e.g. Muhammed Shareef" required>
+                </div>
+                <div class="form-group">
+                  <label for="f-phone">Mobile / WhatsApp Number *</label>
+                  <input type="tel" id="f-phone" name="entry.1422811881" class="form-input" placeholder="e.g. +91 98470 XXXXX" required>
+                </div>
+              </div>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="f-service">Service or Programme Required</label>
+                  <select id="f-service" name="entry.1631577008" class="form-select">
+                    <option value="Personal Counselling (Stress, Anxiety, Confidence)">Personal Counselling (Stress, Anxiety, Confidence)</option>
+                    <option value="Adolescent &amp; Family Counselling">Adolescent &amp; Family Counselling</option>
+                    <option value="Couples &amp; Pre-marital Counselling">Couples &amp; Pre-marital Counselling</option>
+                    <option value="Career Guidance for Student (Courses &amp; Aptitude)">Career Guidance for Student (Courses &amp; Aptitude)</option>
+                    <option value="Learning Disability Assessment &amp; Study Help">Learning Disability Assessment &amp; Study Help</option>
+                    <option value="Meditation &amp; Relaxation Therapy">Meditation &amp; Relaxation Therapy</option>
+                    <option value="School or College Keynote Programme">School or College Keynote Programme</option>
+                    <option value="Corporate or Institutional Training">Corporate or Institutional Training</option>
+                    <option value="Other Consultation / Enquiries">Other Consultation / Enquiries</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="f-mode">Preferred Format</label>
+                  <select id="f-mode" name="entry.1372565443" class="form-select">
+                    <option value="In-Person at Kondotty Clinic">In-Person at Kondotty Clinic</option>
+                    <option value="Online Video Consultation (Zoom / Meet)">Online Video Consultation (Zoom / Meet)</option>
+                    <option value="On-Site at Our Campus / Institution">On-Site at Our Campus / Institution</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="f-time">Preferred Day / Slot</label>
+                <select id="f-time" name="entry.1725899432" class="form-select">
+                  <option value="Weekday Morning (10:00 AM - 1:00 PM)">Weekday Morning (10:00 AM – 1:00 PM)</option>
+                  <option value="Weekday Afternoon (2:00 PM - 4:30 PM)">Weekday Afternoon (2:00 PM – 4:30 PM)</option>
+                  <option value="Weekday Evening (4:30 PM - 6:30 PM)">Weekday Evening (4:30 PM – 6:30 PM)</option>
+                  <option value="Saturday Appointment">Saturday Appointment</option>
+                  <option value="Earliest Available Slot">Earliest Available Slot</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="f-message">Brief Details / What would you like help with?</label>
+                <textarea id="f-message" name="entry.988205658" class="form-textarea" placeholder="For example: My son is in Plus Two and feeling overwhelmed about entrance exams and course selection..."></textarea>
+              </div>
+
+              <div class="form-buttons">
+                <button type="submit" class="btn btn-gold" id="btn-submit-gform">
+                  <svg><use href="#i-mail"/></svg>
+                  <span>Submit Enquiry</span>
+                </button>
+                <button type="button" class="btn btn-ghost" id="btn-send-wa">
+                  <svg><use href="#i-wa"/></svg>
+                  <span>Send on WhatsApp</span>
+                </button>
+              </div>
+
+              <p class="form-disclaimer">
+                ✅ <strong>Responses go directly to Dr. Salmani's Google Forms inbox.</strong> You may also send your enquiry instantly on WhatsApp using the button above.
+              </p>
+            </form>
+
+            <!-- Hidden iframe to absorb Google Forms POST response (prevents page redirect) -->
+            <iframe name="hidden-gform-iframe" id="hidden-gform-iframe" style="display:none;" aria-hidden="true"></iframe>
+          </div>

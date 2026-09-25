@@ -11,7 +11,7 @@ This website is a bespoke, luxury digital platform built for **Dr. Abdussalam Sa
 
 The visual direction directly adopts the **Prestige Obsidian Velvet & Royal Champagne Gold** aesthetic inspired by Dr. Salmani's official executive profile brochure, combined with modern interactive capabilities:
 
-- **Executive Dark & Ivory Light Modes**: Seamless one-click theme switcher with local storage persistence.
+- **Ivory Marble Motivation Wall**: off-white marble backdrop with engraved motivational icons and words drifting in zig-zag paths (static when reduced motion is preferred).
 - **Dual Practice Hub**:
   - **BSS Skill School & Counseling Centre** (Tower 17, EC Mall, ICA Campus, Kondotty): Confidential one-to-one clinical, family, pre-marital, and learning difficulty sessions.
   - **Escola International**: Over 4,000 keynote addresses and training masterclasses for universities, schools, PTAs, and corporate organizations.
@@ -24,26 +24,35 @@ The visual direction directly adopts the **Prestige Obsidian Velvet & Royal Cham
 
 ## 📂 Project Structure
 
+The site is plain HTML/CSS/JS. Shared parts (header, footer, icons) live in `src/` and are stitched into each page by a small Python script.
+
 ```text
 Salmani/
-├── index.html                 # Master semantic HTML5 website
-├── styles.css                 # Luxury styling, dark/light themes, animations
-├── script.js                  # WhatsApp router, theme toggle, vCard generator
-├── assets/                    # Optimized image assets
-│   ├── dr_salmani_portrait.jpg       # Authentic executive portrait
-│   ├── dr_salmani_avatar.jpg         # Circular gold-halo avatar
-│   ├── dr_salmani_avatar_circle.png  # Transparent circular rim asset
-│   ├── dr_salmani_executive_card.png # Framed luxury card graphic
-│   ├── visiting_card.jpg             # Reference visiting card
-│   └── docs/                         # Document repository
-│       ├── Dr_Abdussalam_Salmani_Profile.pdf  # Downloadable executive PDF
-│       ├── visiting_card_original.jpg
-│       ├── resume_page_1.jpg
-│       └── resume_page_2.jpg
-└── README.md                  # Project guide & deployment documentation
+├── index.html, about.html, expertise.html, counselling.html, achievements.html,
+│   gallery.html, resources.html, book.html, contact.html   # GENERATED — do not edit
+├── src/
+│   ├── pages/        # the content of each page (edit these)
+│   └── partials/     # head, header, footer, icon sprite, FAQ, enquiry form
+├── styles.css        # ivory-marble theme + all components
+├── script.js         # marble motivation wall, nav, reveals, forms, vCard
+├── gallery.js        # gallery masonry, filters, homepage preview, lightbox
+├── booking.js        # 5-step booking, ₹500 UPI advance, UTR submission
+├── tools/
+│   ├── build_site.py     # python tools/build_site.py  → rebuilds the HTML pages
+│   └── build_gallery.py  # python tools/build_gallery.py → optimises gallery images
+└── assets/
+    ├── Training_imgs/, banners/   # ORIGINAL photos/posters (never modified)
+    ├── gallery/                   # optimised copies + gallery-data.js + INVENTORY.md
+    └── payment/upi-qr.png         # UPI QR code for the booking page
 ```
 
----
+### Adding gallery photos
+1. Drop originals into `assets/Training_imgs/` or `assets/banners/` (optional: `assets/certificates/`).
+2. Run `python tools/build_gallery.py` (needs Pillow). It reports formats, sizes, orientation and duplicates in `assets/gallery/INVENTORY.md`, and writes WebP/AVIF/JPG copies.
+3. Add verified captions in `assets/gallery/gallery-data.js` (`title`, `date`, `description`, `alt`, `featured`, `homepage`). They are kept on re-runs.
+
+### Booking payments
+The ₹500 advance is paid by UPI QR; the visitor submits their UTR. Requests reach the existing Google Form with the booking details in the message field. **Payments are verified manually** — the site never marks a payment as successful on its own.
 
 ## 🚀 Key Features
 
@@ -75,9 +84,7 @@ The interactive booking module formats client submissions directly into structur
 ## 🌐 How to Preview or Deploy
 
 ### Local Preview
-Simply double-click `index.html` to open in any web browser (Chrome, Edge, Safari, Firefox).
-
-Or run a local server:
+After editing anything in `src/`, run `python tools/build_site.py`. Then run a local server:
 ```bash
 # Python
 python -m http.server 8000
